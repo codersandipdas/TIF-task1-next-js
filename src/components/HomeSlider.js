@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -68,9 +68,19 @@ export const SLIDER_DATA = [
 ];
 
 const HomeSlider = () => {
+  const slider = useRef();
+  const [current, setCurrent] = useState(1);
+  const next = () => {
+    if (parseInt(current / 3 + 1) === SLIDER_DATA.length / 3) return null;
+    slider.current.slickNext();
+  };
+  const previous = () => {
+    slider.current.slickPrev();
+  };
+
   const settings = {
-    dots: true,
-    arrows: true,
+    dots: false,
+    arrows: false,
     infinite: false,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -89,11 +99,18 @@ const HomeSlider = () => {
         },
       },
     ],
+    afterChange: (newIndex) => {
+      setCurrent(newIndex);
+    },
   };
 
   return (
     <>
-      <Slider className='myslider' {...settings}>
+      <Slider
+        ref={(c) => (slider.current = c)}
+        className='myslider'
+        {...settings}
+      >
         {SLIDER_DATA.map((data) => {
           return (
             <Box key={data.id} px='22px' pb='60px'>
@@ -151,6 +168,28 @@ const HomeSlider = () => {
           );
         })}
       </Slider>
+      <Box textAlign='center'>
+        <Button
+          onClick={previous}
+          variant='outline'
+          borderColor='#424961'
+          padding={0}
+          me={6}
+        >
+          <HiChevronLeft fontSize='30px' />
+        </Button>
+        <span>{parseInt(current / 3 + 1)}</span> <span> / </span>
+        <span>{SLIDER_DATA.length / 3}</span>
+        <Button
+          onClick={next}
+          variant='outline'
+          borderColor='#424961'
+          padding={0}
+          ms={6}
+        >
+          <HiChevronRight fontSize='30px' />
+        </Button>
+      </Box>
     </>
   );
 };
