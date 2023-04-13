@@ -63,7 +63,7 @@ img.logo {
 
 .slick-prev:before,
 .slick-next:before {
-  background-image: url(../assets/slider/arrows/prev-arrow.png);
+  background-image: url(https://codersandip.com/wp-content/uploads/2023/04/prev-arrow.png);
   background-size: 50%;
   color: transparent !important;
   background-position: center;
@@ -71,5 +71,5 @@ img.logo {
   opacity: 1 !important;
 }
 .slick-next:before {
-  background-image: url(../assets/slider/arrows/next-arrow.png);
+  background-image: url(https://codersandip.com/wp-content/uploads/2023/04/next-arrow.png);
 }
